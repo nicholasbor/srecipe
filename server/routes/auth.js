@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator")
 
 // Register a new user
-router.post("/register", async (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
         const { full_name, username, email, user_password } = req.body;
         
@@ -26,8 +26,42 @@ router.post("/register", async (req, res) => {
             [full_name, username, email, hash]
         );
 
+        const token = jwtGenerator(new_user.rows[0].u_id);
+
+        res.json({token});
+
     } catch (err) {
         console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
+
+// Sign In
+router.post("/signin", async (req, res) => {
+    try {
+        const { email, user_password } = req.body;
+
+        const user = await pool.query(
+            "SELECT * FROM users WHERE email = $1",
+            [email]
+        );
+
+        if (user.rows.length === 0) {
+            return res.status(401).send("Provided email is incorrect");
+        }
+
+        const valid_pass = await bcrypt.compare(user_password, user.rows[0].user_password);
+
+        if (!valid_pass) {
+            return res.status(401).send("Provided password is incorrect");
+        }
+
+        const token = jwtGenerator(user.rows[0].u_id);
+
+        res.json({ token });
+
+    } catch (err) {
+        console.error(err.messgae);
         res.status(500).send("Server Error");
     }
 });
