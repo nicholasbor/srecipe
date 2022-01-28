@@ -2,6 +2,7 @@ const router = require("express").Router();
 const pool = require("../db/db")
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator")
+const authorize = require("../middleware/authorization");
 
 // Register a new user
 router.post("/signup", async (req, res) => {
@@ -60,6 +61,15 @@ router.post("/signin", async (req, res) => {
 
         res.json({ token });
 
+    } catch (err) {
+        console.error(err.messgae);
+        res.status(500).send("Server Error");
+    }
+});
+
+router.get("/verify", authorize, async(req, res) => {
+    try {
+        res.json(true);
     } catch (err) {
         console.error(err.messgae);
         res.status(500).send("Server Error");
