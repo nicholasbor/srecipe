@@ -10,8 +10,8 @@ import {
 } from "react-router-dom";
 
 import NavBar from './components/navBar';
-import Login from './components/login';
-import Register from './components/register';
+import SignIn from './components/signin';
+import SignUp from './components/signup';
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<NavBar />}/>
-				<Route path="login" element={<Login />}/>
-				<Route path="register" element={<Register />}/>
+				<Route path="signin" element={<SignIn />}/>
+				<Route path="signup" element={<SignUp />}/>
 
 			</Routes>
 								

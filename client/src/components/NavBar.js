@@ -14,8 +14,8 @@ const NavBar = () => {
                 </svg>
             </div>
             <div className="pr-8 md:block hidden">
-                <Link className="p-4" to="/login">Log in</Link>
-                <Link className="p-4" to="/register">Register</Link>
+                <Link className="p-4" to="/signin">Sign In</Link>
+                <Link className="p-4" to="/signup">Sign Up</Link>
             </div>
         </nav>
     );
