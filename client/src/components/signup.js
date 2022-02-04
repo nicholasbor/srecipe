@@ -1,6 +1,7 @@
 import React from 'react';
 import { 
-    Fragment
+    Fragment,
+    useState
 } from 'react';
 import { 
     Link,
@@ -16,7 +17,7 @@ const SignUp = () => {
                     </h1>
                 </header>
 
-                <body className='bg-white max-w-lg mx-auto rounded-lg p-10'>
+                <div className='bg-white max-w-lg mx-auto rounded-lg p-10'>
                     <div>
                         <h3 className='py-5 text-center text-2xl font-bold text-gray-700'> Create your account </h3>
                     </div>
@@ -30,7 +31,7 @@ const SignUp = () => {
                                 name="email" 
                                 id="email" 
                             />
-                            <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' for="email">Email</label>
+                            <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' htmlFor='email'>Email</label>
                         </div>
 
 
@@ -42,7 +43,7 @@ const SignUp = () => {
                                 name="username" 
                                 id="username" 
                             />
-                            <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' for="username">Username</label>
+                            <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' htmlFor='username'>Username</label>
                         </div>
 
                         <div className='relative my-4 bg-white rounded-md border-2 border-gray-300 focus-within:border-sky-500'>
@@ -50,15 +51,15 @@ const SignUp = () => {
                                 className='block pb-4 px-3 pt-6 w-full text-md appearance-none focus:outline-none bg-transparent bg-white rounded-md text-gray-700' 
                                 placeholder=" "  
                                 type="password" 
-                                name="password" 
-                                id="password" 
+                                name="user_password" 
+                                id="user_password" 
                             />
-                            <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' for="password">Password</label>
+                            <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' htmlFor='user_password'>Password</label>
                         </div>
 
                         <button className='shadow-lg hover:shadow-sm bg-gradient-to-r from-moonlit1 via-moonlit2 to-moonlit3 hover:from-cyan-500 hover:to-blue-500 text-white rounded-md font-bold p-2 mt-5 transition duration-300' type="submit">Sign Up</button>
                     </form>
-                </body>
+                </div>
 
                 <div className='flex space-x-2 text-white justify-center mt-12'>
                     <p>Have an account?</p>
