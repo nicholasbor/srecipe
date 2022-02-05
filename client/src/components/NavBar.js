@@ -1,10 +1,14 @@
 import React from 'react';
 import { 
     Link,
-    Route
 } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({isAuth, setAuth}) => {
+
+    const handleLogout = () => {
+        setAuth(false);
+    };
+    
     return (
         <nav className="flex justify-between h-16 bg-black text-white items-center">
             <Link className="pl-8" to='/'>Srecipe</Link>
@@ -14,8 +18,8 @@ const NavBar = () => {
                 </svg>
             </div>
             <div className="pr-8 md:block hidden">
-                <Link className="p-4" to="/signin">Sign In</Link>
-                <Link className="p-4" to="/signup">Sign Up</Link>
+                {!isAuth ? (<Link className="p-4" to="/signin">Sign In</Link>) : (<Link className="p-4" to="/profile">Profile</Link>)}
+                {!isAuth ? (<Link className="p-4" to="/signup">Sign Up</Link>) : (<button onClick={handleLogout}>Log Out</button>)}
             </div>
         </nav>
     );

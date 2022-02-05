@@ -7,7 +7,7 @@ import {
     Link,
 } from 'react-router-dom';
 
-const SignUp = () => {
+const SignUp = ({ setAuth }) => {
     const [details, setDetails] = useState({
         email: "",
         username: "",
@@ -40,6 +40,7 @@ const SignUp = () => {
             
             localStorage.setItem('token', data.token);
 
+            setAuth(true);
         } catch (err) {
             console.error(err.message);
         }

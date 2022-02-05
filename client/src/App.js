@@ -1,32 +1,44 @@
-import { Fragment } from 'react';
+import { 
+    Fragment,
+    useState
+} from 'react';
 import './App.css';
 
 import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
-	Redirect,
-	Link
+	Navigate,
 } from "react-router-dom";
 
-import NavBar from './components/navBar';
 import SignIn from './components/signin';
 import SignUp from './components/signup';
+import WithNav from './components/withNav';
+import WithoutNav from './components/withoutNav';
+import Home from './components/home'
 
 function App() {
-  return (
-    <Fragment>
-		<Router>
-			<Routes>
-				<Route path="/" element={<NavBar />}/>
-				<Route path="signin" element={<SignIn />}/>
-				<Route path="signup" element={<SignUp />}/>
+	const [isAuth, setIsAuth] = useState(false)
 
-			</Routes>
-								
-		</Router>
-	</Fragment>
-  );
+	const setAuth = (bool) => {
+		setIsAuth(bool);
+	};
+
+	return (
+		<Fragment>
+			<Router>
+				<Routes>
+					<Route element={<WithNav isAuth={isAuth} setAuth={setAuth}/>}>
+						<Route path="/" element={<Home />}/>
+					</Route>
+					<Route element={<WithoutNav />}>
+						<Route path="signup" element={ !isAuth ? (<SignUp setAuth={setAuth} />) : (<Navigate to="/" />)}/>
+						<Route path="signin" element={ !isAuth ? (<SignIn />) : (<Navigate to="/" />)}/>
+					</Route>
+				</Routes>
+			</Router>
+		</Fragment>
+	);
 }
 
 export default App;
