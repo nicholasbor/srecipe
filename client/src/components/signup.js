@@ -8,6 +8,43 @@ import {
 } from 'react-router-dom';
 
 const SignUp = () => {
+    const [details, setDetails] = useState({
+        email: "",
+        username: "",
+        user_password: ""
+    });
+    const { email, username, user_password } = details
+
+    const handleChange = (e) => {
+        setDetails({
+            ...details, 
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const onSubmitForm = async (e) => {
+        e.preventDefault();
+
+        try {
+            const body = { email, username, user_password };
+
+            const res = await fetch("/auth/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body),
+            });
+
+            const data = await res.json();
+            
+            localStorage.setItem('token', data.token);
+
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
     return (
         <Fragment>
             <div className='px-4 pt-20 pb-40 bg-gradient-to-r from-moonlit1 via-moonlit2 to-moonlit3 min-h-screen font-Roboto shadow-xl'>
@@ -22,7 +59,7 @@ const SignUp = () => {
                         <h3 className='py-5 text-center text-2xl font-bold text-gray-700'> Create your account </h3>
                     </div>
 
-                    <form className='flex flex-col' autoComplete='off'>
+                    <form className='flex flex-col' autoComplete='off' onSubmit={onSubmitForm}>
                         <div className='relative my-4 bg-white rounded-md border-2 border-gray-300 focus-within:border-sky-500'>
                             <input 
                                 className='block pb-4 px-3 pt-6 w-full text-md appearance-none focus:outline-none bg-transparent bg-white rounded-md text-gray-700' 
@@ -30,6 +67,8 @@ const SignUp = () => {
                                 type="email" 
                                 name="email" 
                                 id="email" 
+                                value={email} 
+                                onChange={e => handleChange(e)} 
                             />
                             <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' htmlFor='email'>Email</label>
                         </div>
@@ -42,6 +81,8 @@ const SignUp = () => {
                                 type="text" 
                                 name="username" 
                                 id="username" 
+                                value={username} 
+                                onChange={e => handleChange(e)}
                             />
                             <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' htmlFor='username'>Username</label>
                         </div>
@@ -53,6 +94,8 @@ const SignUp = () => {
                                 type="password" 
                                 name="user_password" 
                                 id="user_password" 
+                                value={user_password} 
+                                onChange={e => handleChange(e)}
                             />
                             <label className='absolute top-0 text-md pb-4 px-3 pt-5 -zIndex-1 duration-300 origin-0 rounded text-gray-700 font-bold' htmlFor='user_password'>Password</label>
                         </div>
