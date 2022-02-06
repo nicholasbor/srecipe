@@ -33,7 +33,7 @@ function App() {
 					</Route>
 					<Route element={<WithoutNav />}>
 						<Route path="signup" element={ !isAuth ? (<SignUp setAuth={setAuth} />) : (<Navigate to="/" />)}/>
-						<Route path="signin" element={ !isAuth ? (<SignIn />) : (<Navigate to="/" />)}/>
+						<Route path="signin" element={ !isAuth ? (<SignIn setAuth={setAuth} />) : (<Navigate to="/" />)}/>
 					</Route>
 				</Routes>
 			</Router>

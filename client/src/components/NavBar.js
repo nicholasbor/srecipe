@@ -6,6 +6,7 @@ import {
 const NavBar = ({isAuth, setAuth}) => {
 
     const handleLogout = () => {
+        localStorage.removeItem('token');
         setAuth(false);
     };
     

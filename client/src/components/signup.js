@@ -1,13 +1,15 @@
 import React from 'react';
 import { 
     Fragment,
-    useState
+    useState,
+    useEffect
 } from 'react';
 import { 
     Link,
 } from 'react-router-dom';
 
 const SignUp = ({ setAuth }) => {
+
     const [details, setDetails] = useState({
         email: "",
         username: "",
@@ -22,7 +24,7 @@ const SignUp = ({ setAuth }) => {
         });
     }
 
-    const onSubmitForm = async (e) => {
+    const handleSubmitForm = async (e) => {
         e.preventDefault();
 
         try {
@@ -60,7 +62,7 @@ const SignUp = ({ setAuth }) => {
                         <h3 className='py-5 text-center text-2xl font-bold text-gray-700'> Create your account </h3>
                     </div>
 
-                    <form className='flex flex-col' autoComplete='off' onSubmit={onSubmitForm}>
+                    <form className='flex flex-col' autoComplete='off' onSubmit={handleSubmitForm}>
                         <div className='relative my-4 bg-white rounded-md border-2 border-gray-300 focus-within:border-sky-500'>
                             <input 
                                 className='block pb-4 px-3 pt-6 w-full text-md appearance-none focus:outline-none bg-transparent bg-white rounded-md text-gray-700' 
