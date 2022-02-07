@@ -1,6 +1,7 @@
 import { 
     Fragment,
-    useState
+    useState,
+	useEffect
 } from 'react';
 import './App.css';
 
@@ -23,6 +24,33 @@ function App() {
 	const setAuth = (bool) => {
 		setIsAuth(bool);
 	};
+
+	const checkAuth = async () => {
+		if (localStorage.token) {
+			try {
+				const res = await fetch("/auth/verify", {
+					method: "GET",
+					headers: {
+						token: localStorage.token
+					},
+				});
+	
+				const data = await res.json();
+				
+				if (data === true) {
+					setAuth(true);
+				} else {
+					setAuth(false);
+				}
+			} catch (err) {
+				console.error(err.message);
+			}
+		}
+	};
+
+	useEffect(() => {
+		checkAuth();
+	});
 
 	return (
 		<Fragment>

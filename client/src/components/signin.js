@@ -79,7 +79,7 @@ const SignIn = ({ setAuth }) => {
                         <input 
                             className='block pb-4 px-3 pt-6 w-full text-md appearance-none focus:outline-none bg-transparent bg-white rounded-md text-gray-600' 
                             placeholder=" "  
-                            type="user_password" 
+                            type="password" 
                             name="user_password" 
                             id="user_password"
                             value={user_password}
